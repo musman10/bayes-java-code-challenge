@@ -1,0 +1,27 @@
+[
+    {
+        "target": "npc_dota_hero_bane",
+        "damage_instances": 68,
+        "total_damage": 3483
+    },
+    {
+        "target": "npc_dota_hero_bloodseeker",
+        "damage_instances": 196,
+        "total_damage": 6172
+    },
+    {
+        "target": "npc_dota_hero_death_prophet",
+        "damage_instances": 76,
+        "total_damage": 5865
+    },
+    {
+        "target": "npc_dota_hero_mars",
+        "damage_instances": 22,
+        "total_damage": 1450
+    },
+    {
+        "target": "npc_dota_hero_rubick",
+        "damage_instances": 28,
+        "total_damage": 1690
+    }
+]

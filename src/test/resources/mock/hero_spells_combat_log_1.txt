@@ -1,0 +1,18 @@
+[
+    {
+        "spell": "abyssal_underlord_cancel_dark_rift",
+        "casts": 1
+    },
+    {
+        "spell": "abyssal_underlord_dark_rift",
+        "casts": 3
+    },
+    {
+        "spell": "abyssal_underlord_firestorm",
+        "casts": 67
+    },
+    {
+        "spell": "abyssal_underlord_pit_of_malice",
+        "casts": 14
+    }
+]
