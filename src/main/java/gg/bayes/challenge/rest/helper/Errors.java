@@ -1,5 +1,8 @@
 package gg.bayes.challenge.rest.helper;
 
+/**
+ * Collection of recognized errors and their messages
+ */
 public enum Errors {
 
     MATCH_NOT_FOUND("Match not found with id = ");

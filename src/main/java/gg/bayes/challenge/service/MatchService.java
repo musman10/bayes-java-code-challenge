@@ -5,6 +5,7 @@ import gg.bayes.challenge.persistence.model.CombatLogEntryEntity;
 import gg.bayes.challenge.persistence.model.MatchEntity;
 import gg.bayes.challenge.persistence.repository.CombatLogEntryRepository;
 import gg.bayes.challenge.persistence.repository.MatchRepository;
+import gg.bayes.challenge.rest.helper.Constants;
 import gg.bayes.challenge.rest.helper.Errors;
 import gg.bayes.challenge.rest.helper.LogParser;
 import gg.bayes.challenge.rest.model.HeroDamage;
@@ -14,6 +15,7 @@ import gg.bayes.challenge.rest.model.HeroSpells;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.yaml.snakeyaml.scanner.Constant;
 
 import javax.persistence.Tuple;
 import java.math.BigInteger;
@@ -55,17 +57,17 @@ public class MatchService {
 
         List<Tuple> heroKillsTuples = combatLogEntryRepository.findHeroKillsByMatchId(matchId);
         List<HeroKills> heroKillsList = heroKillsTuples.stream()
-                .filter(tuple -> tuple.get(0, String.class).startsWith("npc_dota_hero_"))
+                .filter(tuple -> tuple.get(0, String.class).startsWith(Constants.COMBAT_LOG_HERO_PREFIX))
                 .map(filteredTuple -> HeroKills.builder()
                         .kills(filteredTuple.get(1,BigInteger.class).intValue())
-                        .hero(filteredTuple.get(0, String.class).replace("npc_dota_hero_",""))
+                        .hero(filteredTuple.get(0, String.class).replace(Constants.COMBAT_LOG_HERO_PREFIX,""))
                         .build())
                 .collect(Collectors.toList());
         return heroKillsList;
     }
 
     public List<HeroItem> getHeroItems(long matchId, String heroName) {
-        heroName = "npc_dota_hero_" + heroName;
+        heroName = Constants.COMBAT_LOG_HERO_PREFIX + heroName;
         List<Tuple> heroItemTuples = combatLogEntryRepository.findHeroItemsByHeroName(matchId, heroName);
         List<HeroItem> heroItems= heroItemTuples.stream()
                 .map(itemTuple -> HeroItem.builder()
@@ -77,7 +79,7 @@ public class MatchService {
     }
 
     public List<HeroSpells> getHeroSpells(long matchId, String heroName){
-        heroName = "npc_dota_hero_" + heroName;
+        heroName = Constants.COMBAT_LOG_HERO_PREFIX + heroName;
         List<Tuple> heroItemTuples = combatLogEntryRepository.findHeroSpellsByHeroName(matchId, heroName);
         List<HeroSpells> heroSpells= heroItemTuples.stream()
                 .map(itemTuple -> HeroSpells.builder()
@@ -89,7 +91,7 @@ public class MatchService {
     }
 
     public List<HeroDamage> getHeroDamages(long matchId, String heroName){
-        heroName = "npc_dota_hero_" + heroName;
+        heroName = Constants.COMBAT_LOG_HERO_PREFIX + heroName;
         List<Tuple> heroDamageTuples = combatLogEntryRepository.findHeroDamagesByHeroName(matchId, heroName);
         List<HeroDamage> heroDamages= heroDamageTuples.stream()
                 .map(itemTuple -> HeroDamage.builder()
